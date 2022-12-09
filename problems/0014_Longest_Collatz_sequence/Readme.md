@@ -18,3 +18,4 @@ Which starting number, under one million, produces the longest chain?
 **NOTE**: Once the chain starts the terms are allowed to go above one million.
 
 ## Solution
+The starting number, under 1000000, that produces the longest chain is: 837799

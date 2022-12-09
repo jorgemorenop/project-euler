@@ -1,6 +1,5 @@
 def power_digit_sum(power: int) -> int:
-    res = 0
-
+    res = sum(int(i) for i in str(2**power))
     print(f"Sum of the digits of 2^{power}: {res}")
     return res
 
