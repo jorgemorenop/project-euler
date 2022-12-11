@@ -8,4 +8,39 @@ For example, when the list is sorted into alphabetical order, COLIN, which is wo
 
 What is the total of all the name scores in the file?
 
+
+
+## Implementation
+
+
+```python
+from pathlib import Path
+
+# Solution
+def names_scores(names: list[str]) -> int:
+    return sum(sum(ord(c) - ord('A') + 1 for c in name.upper()) * (i+1) for i, name in enumerate(sorted(names)))
+# END Solution
+
+
+from IPython.display import  Markdown
+
+with Path("names.txt").open('r') as f:
+    solution = names_scores(names=[e.strip('"') for e in f.read().split(',')])
+
+Markdown(f"""
 ## Solution
+
+Sum of all name scores: {solution}
+""")
+```
+
+
+
+
+
+## Solution
+
+Sum of all name scores: 871198282
+
+
+
