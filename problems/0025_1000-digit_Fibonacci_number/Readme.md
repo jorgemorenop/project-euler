@@ -28,15 +28,64 @@ What is the index of the first term in the Fibonacci sequence to contain 1000 di
 
 ## Implementation
 
+Since the Fibonacci sequence converges to
+
+$$\frac{{\phi}^n}{\sqrt(5)}$$
+
+Where $\phi$ is the golden ratio.
+
+Since the first digit with 1000 digits is $10^{999}$, if we want to get the first whole number such that
+
+$$\frac{{\phi}^n}{\sqrt(5)} > 10^{999}$$
+
+If we try to solve n:
+$$ n*log(\phi) - \frac{log(5)}{2} > 999*log(10) $$
+$$ n > \frac{999*log(10)+\frac{log(5)}{2}}{log(\phi)} $$
+
+This gives us that $n > 4781.859..$, so the first index to verify this is $4782$.
+
 
 ```python
-def first_n_digit_fibonacci_number(n: int) -> int:
-    res = 0
-    print(f"First fibonacci number with {n}-digits: {res}")
-    return res
+def first_n_digit_fibonacci_number_bruteforce(n: int) -> int:
+    import math
 
-first_n_digit_fibonacci_number(n=1000)
+    second_to_last_number = last_number = 1
+    index = 2
+    while math.log10(last_number)+1 < n:
+        last_number = second_to_last_number + last_number
+        second_to_last_number = last_number - second_to_last_number
+        index += 1
+    print(last_number, second_to_last_number, index)
+    return index
+
+
+def first_n_digit_fibonacci_number_math(n: int) -> int:
+    import math
+
+    phi = ( 1 + math.sqrt(5) ) / 2
+    return math.ceil(((n-1) * math.log(10) + math.log(5)/2)/math.log(phi))
+# END Solution
+
+
+from IPython.display import  Markdown
+
+N = 1_000
+solution = first_n_digit_fibonacci_number_math(n=N)
+
+Markdown(f"""
+## Solution
+
+First fibonacci number with {N}-digits: {solution}
+""")
 ```
 
+
+
+
+
 ## Solution
+
+First fibonacci number with 1000-digits: 4782
+
+
 
