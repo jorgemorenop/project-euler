@@ -10,4 +10,64 @@ As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest numb
 
 Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 
+
+
+## Implementation
+
+
+```python
+# Solution
+def non_abundant_sums_bruteforce() -> int:
+    import math
+
+    upper_limit = 28123
+    # upper_limit = 30000
+
+    divisors: dict[int, set] = {1: {1}}
+    abundant_numbers = []
+
+    primes = []
+    for i in range(2, upper_limit):
+        divisors[i] = {1}
+
+        sqrt_i = math.sqrt(i)
+        is_prime = True
+        for p in primes:
+            if p > sqrt_i:
+                break
+            if i % p == 0:
+                divisors[i].update(divisors[int(i/p)].union({p * d for d in divisors[int(i/p)]}).union({int(i/p)}))
+                is_prime = False
+        if is_prime:
+            primes.append(i)
+
+        if sum(divisors[i]) > i:
+            abundant_numbers.append(i)
+
+    abundant_sums = set(abundant_numbers[i]+abundant_numbers[j] for i in range(len(abundant_numbers)) for j in range(i, len(abundant_numbers)))
+    non_abundant_sums = [i for i in range(1, upper_limit+1) if i not in abundant_sums]
+    return sum(non_abundant_sums)
+# END Solution
+
+
+from IPython.display import  Markdown
+
+solution = non_abundant_sums_bruteforce()
+
+Markdown(f"""
 ## Solution
+
+Sum of all possible integers that cannot be written as the sum of two abundant numbers: {solution}
+""")
+```
+
+
+
+
+
+## Solution
+
+Sum of all possible integers that cannot be written as the sum of two abundant numbers: 4179871
+
+
+
