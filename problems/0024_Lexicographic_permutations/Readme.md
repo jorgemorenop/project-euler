@@ -25,9 +25,8 @@ def lexicographic_permutations(n: int, max_digit: int) -> str:
     m = n - 1
     while digits:
         combinations = math.factorial(len(digits)-1)
-        pos = int(m / combinations)
+        pos, m = divmod(m, combinations)
         res += str(digits.pop(pos))
-        m = m % combinations
     return res
 # END Solution
 
