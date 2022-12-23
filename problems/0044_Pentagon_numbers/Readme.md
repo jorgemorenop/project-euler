@@ -22,9 +22,6 @@ def pentagon_numbers() -> int:
         # This is the quadratic solution for n of n(3n-1)/2 = s
         return (1 + math.sqrt(1 + 24 * number)) % 6 == 0 # We don't consider the (-) bc n must be positive
 
-    def p(n: int):
-        return n*(3*n-1)
-
     min_d = float("inf")
     p_n = [1, 5]
     while p_n[-1]-p_n[-2] < min_d:
