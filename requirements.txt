@@ -1,3 +1,6 @@
 notebook==6.5.2
 ipython==8.7.0
 mpmath==1.2.1
+traitlets~=5.7.0
+nbconvert~=7.2.6
+sympy==1.11.1
